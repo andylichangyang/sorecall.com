@@ -29,6 +29,8 @@
             position: relative;
             padding-top: 56.25%; /* 16:9 宽高比 */
             background: #000;
+            border-radius: 8px;
+            overflow: hidden;
         }
         
         .game-frame {
@@ -57,6 +59,16 @@
 
         .action-button:hover {
             background-color: #2980b9;
+        }
+
+        /* 添加加载提示 */
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 18px;
         }
     </style>
 </head>
@@ -89,15 +101,16 @@
             
             <!-- 游戏iframe -->
             <div class="game-frame-container">
+                <div class="loading">游戏加载中...</div>
                 <iframe 
                     class="game-frame"
-                    src="https://itch.io/embed/251501?dark=true&border_width=0&bg_color=000000&fg_color=ffffff&link_color=3498db"
+                    src="https://nick64.itch.io/smpsf/embed/251501?dark=true&border_width=0&bg_color=000000&fg_color=ffffff&link_color=3498db"
                     allowfullscreen
-                    allow="autoplay; fullscreen"
+                    allow="autoplay; fullscreen; gamepad"
                 ></iframe>
             </div>
 
-            <!-- 游戏操作按钮 -->
+            <!-- 备用链接 -->
             <div class="game-actions">
                 <a href="https://nick64.itch.io/smpsf" class="action-button" target="_blank">在itch.io上玩</a>
                 <a href="https://nick64.itch.io/smpsf/download" class="action-button" target="_blank">下载游戏</a>
@@ -108,5 +121,17 @@
     <footer>
         <p>&copy; 2024 SoreCall. All rights reserved.</p>
     </footer>
+
+    <script>
+        // 检查iframe加载状态
+        window.addEventListener('load', function() {
+            const iframe = document.querySelector('.game-frame');
+            const loading = document.querySelector('.loading');
+            
+            iframe.addEventListener('load', function() {
+                loading.style.display = 'none';
+            });
+        });
+    </script>
 </body>
 </html>
