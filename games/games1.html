@@ -22,36 +22,22 @@
             border-radius: 5px;
         }
         
-        .game-embed {
-            margin: 30px auto;
-            max-width: 800px;
-        }
-        
-        .play-button {
-            display: inline-block;
-            padding: 15px 30px;
-            background-color: #3498db;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            margin: 20px 0;
-            font-size: 18px;
-            transition: background-color 0.3s;
-        }
-        
-        .play-button:hover {
-            background-color: #2980b9;
-        }
-        
-        .game-preview {
+        .game-frame-container {
+            width: 100%;
             max-width: 800px;
             margin: 20px auto;
+            position: relative;
+            padding-top: 56.25%; /* 16:9 宽高比 */
         }
         
-        .game-preview img {
-            max-width: 100%;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        .game-frame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #000;
         }
     </style>
 </head>
@@ -74,26 +60,23 @@
                 <h3>游戏说明：</h3>
                 <p>在这款精彩的超级马里奥同人游戏中，收集星星并尽可能获得高分！使用键盘控制马里奥的移动和跳跃。</p>
                 <p>游戏由ИICK★制作，通过itch.io平台分享。</p>
-                <h3>如何开始游戏：</h3>
-                <ol>
-                    <li>点击下方的"开始游戏"按钮</li>
-                    <li>在新打开的页面中点击"Run game"或"开始游戏"按钮</li>
-                    <li>等待游戏加载完成即可开始游玩</li>
-                </ol>
+                <h3>操作说明：</h3>
+                <ul>
+                    <li>使用方向键控制马里奥移动</li>
+                    <li>空格键跳跃</li>
+                    <li>收集星星获得分数</li>
+                </ul>
             </div>
             
-            <!-- 游戏预览图 -->
-            <div class="game-preview">
-                <img src="https://img.itch.zone/aW1hZ2UvMjUxNTAxLzEyMDQ1NTcucG5n/original/8CUPpb.png" alt="游戏预览">
+            <!-- 游戏iframe -->
+            <div class="game-frame-container">
+                <iframe 
+                    class="game-frame"
+                    src="https://nick64.itch.io/smpsf/embed"
+                    allowfullscreen
+                    allow="autoplay; fullscreen"
+                ></iframe>
             </div>
-            
-            <!-- 游戏嵌入区域 -->
-            <div class="game-embed">
-                <iframe width="552" height="167" frameborder="0" src="https://itch.io/embed/251501"><a href="https://nick64.itch.io/smpsf">SUPER MARIO Power Star Frenzy by ИICK★</a></iframe>
-            </div>
-            
-            <!-- 直接游戏链接 -->
-            <a href="https://nick64.itch.io/smpsf" class="play-button" target="_blank">开始游戏</a>
         </div>
     </main>
 
