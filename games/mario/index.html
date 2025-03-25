@@ -1,114 +1,33 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SUPER MARIO Power Star Frenzy - SoreCall</title>
-    <link rel="stylesheet" href="../../css/style.css">
-    <style>
-        .game-container {
-            max-width: 1000px;
-            margin: 100px auto 60px;
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .game-instructions {
-            text-align: left;
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 15px;
-            background-color: #f2f2f2;
-            border-radius: 5px;
-        }
-        
-        .game-frame-container {
-            width: 100%;
-            max-width: 800px;
-            margin: 20px auto;
-            position: relative;
-            padding-top: 56.25%; /* 16:9 宽高比 */
-            background: #000;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        
-        .game-frame {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | NSMB-MarioVsLuigi</title>
+  </head>
+  <body style="text-align: center">
+    <canvas id="unity-canvas" width=960 height=540 style="width: 960px; height: 540px; background: #231F20"></canvas>
+    <script src="Build/MarioVsLuigi-WebGL.loader.js"></script>
+    <script>
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // Mobile device style: fill the whole browser client area with the game canvas:
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
+      }
 
-        .game-actions {
-            margin: 20px 0;
-        }
-
-        .action-button {
-            display: inline-block;
-            padding: 12px 24px;
-            background-color: #3498db;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            margin: 0 10px;
-            transition: background-color 0.3s;
-        }
-
-        .action-button:hover {
-            background-color: #2980b9;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <nav>
-            <div class="logo">SoreCall</div>
-            <ul>
-                <li><a href="../../index.html">首页</a></li>
-                <li><a href="../games.html">游戏列表</a></li>
-                <li><a href="../../about.html">关于我们</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <div class="game-container">
-            <h1>SUPER MARIO Power Star Frenzy</h1>
-            <div class="game-instructions">
-                <h3>游戏说明：</h3>
-                <p>在这款精彩的超级马里奥同人游戏中，收集星星并尽可能获得高分！使用键盘控制马里奥的移动和跳跃。</p>
-                <p>游戏由ИICK★制作，通过itch.io平台分享。</p>
-                <h3>操作说明：</h3>
-                <ul>
-                    <li>使用方向键控制马里奥移动</li>
-                    <li>空格键跳跃</li>
-                    <li>收集星星获得分数</li>
-                </ul>
-            </div>
-            
-            <!-- 游戏iframe -->
-            <div class="game-frame-container">
-                <iframe 
-                    class="game-frame"
-                    src="game.html"
-                    allowfullscreen
-                    allow="autoplay; fullscreen; gamepad"
-                ></iframe>
-            </div>
-
-            <!-- 备用链接 -->
-            <div class="game-actions">
-                <a href="https://nick64.itch.io/smpsf" class="action-button" target="_blank">在itch.io上玩</a>
-                <a href="https://nick64.itch.io/smpsf/download" class="action-button" target="_blank">下载游戏</a>
-            </div>
-        </div>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 SoreCall. All rights reserved.</p>
-    </footer>
-</body>
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        dataUrl: "Build/MarioVsLuigi-WebGL.data.unityweb",
+        frameworkUrl: "Build/MarioVsLuigi-WebGL.framework.js.unityweb",
+        codeUrl: "Build/MarioVsLuigi-WebGL.wasm.unityweb",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "ipodtouch0218",
+        productName: "NSMB-MarioVsLuigi",
+        productVersion: "1.7.1.0-beta",
+        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+      });
+    </script>
+  </body>
 </html>
