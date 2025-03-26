@@ -16,6 +16,187 @@
             text-align: center;
             margin-bottom: 2rem;
         }
+        
+        .games-filter {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-category {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-category button {
+            padding: 0.5rem 1rem;
+            background: #f8f9fa;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-category button.active {
+            background: #3498db;
+            color: white;
+        }
+        
+        .sort-dropdown {
+            position: relative;
+        }
+        
+        .sort-dropdown select {
+            padding: 0.5rem 2rem 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
+            appearance: none;
+            cursor: pointer;
+        }
+        
+        .sort-dropdown::after {
+            content: '▼';
+            font-size: 0.8rem;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+        
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .game-card {
+            transition: all 0.3s;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: white;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .game-thumbnail {
+            position: relative;
+            overflow: hidden;
+            height: 180px;
+            cursor: pointer;
+        }
+        
+        .game-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .game-card:hover .game-thumbnail img {
+            transform: scale(1.05);
+        }
+        
+        .game-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            opacity: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.3s;
+        }
+        
+        .game-thumbnail:hover .game-overlay {
+            opacity: 1;
+        }
+        
+        .play-icon {
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .game-info {
+            padding: 1.2rem;
+        }
+        
+        .game-info h3 {
+            margin: 0 0 0.8rem;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .game-info h3:hover {
+            color: #3498db;
+        }
+        
+        .game-info p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        
+        .game-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #888;
+        }
+        
+        .game-category {
+            background: #f1f1f1;
+            padding: 0.3rem 0.6rem;
+            border-radius: 3px;
+        }
+        
+        .game-rating {
+            display: flex;
+            align-items: center;
+        }
+        
+        .star {
+            color: #f1c40f;
+            margin-right: 2px;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .pagination button {
+            width: 40px;
+            height: 40px;
+            margin: 0 5px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .pagination button:hover, .pagination button.active {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
     </style>
 </head>
 <body>
@@ -33,20 +214,134 @@
     <main>
         <section class="games-section">
             <h1>所有游戏</h1>
+            
+            <div class="games-filter">
+                <div class="filter-category">
+                    <button class="active">全部</button>
+                    <button>动作</button>
+                    <button>冒险</button>
+                    <button>休闲</button>
+                    <button>策略</button>
+                </div>
+                
+                <div class="sort-dropdown">
+                    <select>
+                        <option>最新发布</option>
+                        <option>最早发布</option>
+                        <option>最受欢迎</option>
+                        <option>评分最高</option>
+                    </select>
+                </div>
+            </div>
+            
             <div class="game-grid">
                 <div class="game-card">
-                    <img src="https://storage.googleapis.com/pai-images/fe7b2e83e1a047038a6a1c5e3bf75183.jpeg" alt="马里奥VS路易吉">
-                    <h3>马里奥VS路易吉</h3>
-                    <p>体验马里奥和路易吉的对决！使用键盘控制角色的移动和跳跃。</p>
-                    <a href="games/mario/index.html" class="play-button">开始游戏</a>
+                    <a href="games/mario/index.html" class="game-thumbnail">
+                        <img src="https://storage.googleapis.com/pai-images/fe7b2e83e1a047038a6a1c5e3bf75183.jpeg" alt="马里奥VS路易吉">
+                        <div class="game-overlay">
+                            <div class="play-icon">▶</div>
+                        </div>
+                    </a>
+                    <div class="game-info">
+                        <a href="games/mario/index.html"><h3>马里奥VS路易吉</h3></a>
+                        <p>体验马里奥和路易吉的对决！使用键盘控制角色的移动和跳跃。</p>
+                        <div class="game-meta">
+                            <span class="game-category">动作</span>
+                            <div class="game-rating">
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- 后续可以添加更多游戏卡片 -->
+                
+                <!-- 更多游戏卡片示例 -->
+                <div class="game-card">
+                    <a href="#" class="game-thumbnail">
+                        <img src="https://storage.googleapis.com/pai-images/cd4ee3d5bbe0455ca78e878a4f8df7ce.jpeg" alt="太空探索者">
+                        <div class="game-overlay">
+                            <div class="play-icon">▶</div>
+                        </div>
+                    </a>
+                    <div class="game-info">
+                        <a href="#"><h3>太空探索者</h3></a>
+                        <p>探索浩瀚宇宙，发现新的星球和奇妙生物，开启星际冒险之旅。</p>
+                        <div class="game-meta">
+                            <span class="game-category">冒险</span>
+                            <div class="game-rating">
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span>☆</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-card">
+                    <a href="#" class="game-thumbnail">
+                        <img src="https://storage.googleapis.com/pai-images/675b5df0fe9348f9ab85e825fa7c6415.jpeg" alt="解谜大师">
+                        <div class="game-overlay">
+                            <div class="play-icon">▶</div>
+                        </div>
+                    </a>
+                    <div class="game-info">
+                        <a href="#"><h3>解谜大师</h3></a>
+                        <p>挑战你的大脑，解开数百个独特谜题，提升逻辑思维能力。</p>
+                        <div class="game-meta">
+                            <span class="game-category">休闲</span>
+                            <div class="game-rating">
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pagination">
+                <button>&lt;</button>
+                <button class="active">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>&gt;</button>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 SoreCall. All rights reserved.</p>
+        <p>&copy; 2024 SoreCall. 保留所有权利。</p>
     </footer>
+
+    <script>
+        // 简单的类别筛选效果
+        const filterBtns = document.querySelectorAll('.filter-category button');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                // 这里可以添加真正的筛选功能
+            });
+        });
+        
+        // 简单的分页效果
+        const paginationBtns = document.querySelectorAll('.pagination button');
+        paginationBtns.forEach(btn => {
+            if (btn.textContent !== '<' && btn.textContent !== '>') {
+                btn.addEventListener('click', () => {
+                    paginationBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    // 这里可以添加真正的分页功能
+                });
+            }
+        });
+    </script>
 </body>
 </html>
