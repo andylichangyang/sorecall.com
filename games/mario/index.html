@@ -128,7 +128,7 @@
             </div>
             
             <div class="game-frame">
-                <div id="unity-canvas"></div>
+                <canvas id="unity-canvas" width="960" height="540"></canvas>
                 <div class="loading-container">
                     <div class="loading-text">Loading game...</div>
                     <div class="loading-progress">
@@ -167,13 +167,10 @@
             showBanner: false
         };
 
-        var container = document.querySelector("#unity-canvas");
-        var canvas = document.createElement("canvas");
+        var canvas = document.querySelector("#unity-canvas");
         var loadingBar = document.querySelector(".loading-bar");
         var loadingText = document.querySelector(".loading-text");
         var loadingContainer = document.querySelector(".loading-container");
-        
-        container.appendChild(canvas);
         
         var script = document.createElement("script");
         script.src = loaderUrl;
