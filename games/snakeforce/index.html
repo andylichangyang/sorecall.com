@@ -7,69 +7,75 @@
     <link rel="stylesheet" href="../../css/style.css">
     <style>
         .game-container {
-            max-width: 1000px;
-            margin: 100px auto 60px;
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .game-instructions {
-            text-align: left;
             max-width: 800px;
-            margin: 20px auto;
-            padding: 15px;
-            background-color: #f2f2f2;
-            border-radius: 5px;
+            margin: 2rem auto;
+            padding: 1rem;
         }
-        
+
         .game-frame {
             width: 100%;
-            max-width: 552px;
-            height: 167px;
-            margin: 20px auto;
-            background: #231F20;
-            position: relative;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        
-        .game-iframe {
-            width: 100%;
-            height: 100%;
+            height: 600px;
             border: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: #f8f9fa;
         }
-        
+
+        .game-info {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .game-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .game-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
         .controls {
-            text-align: left;
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 15px;
-            background-color: #f2f2f2;
+            background: #f8f9fa;
+            padding: 1rem;
             border-radius: 5px;
+            margin-top: 1rem;
         }
-        
+
         .controls h3 {
-            margin-top: 0;
-            color: #333;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
         }
-        
+
         .controls ul {
-            list-style-type: none;
+            list-style: none;
             padding: 0;
         }
-        
+
         .controls li {
-            margin: 10px 0;
-            padding: 5px 0;
+            margin: 0.5rem 0;
+            color: #666;
         }
-        
-        .key {
+
+        .back-button {
             display: inline-block;
-            padding: 2px 8px;
-            background: #e0e0e0;
-            border-radius: 3px;
-            margin: 0 2px;
-            font-weight: bold;
+            padding: 0.8rem 1.5rem;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 1rem;
+            transition: background 0.3s;
+        }
+
+        .back-button:hover {
+            background: #2980b9;
         }
     </style>
 </head>
@@ -87,24 +93,30 @@
 
     <main>
         <div class="game-container">
-            <h1>Snake Force</h1>
-            
-            <div class="game-instructions">
-                <h2>Game Description</h2>
-                <p>Snake Force is an exciting arcade game where you control a snake through various challenges. Collect power-ups, avoid obstacles, and try to achieve the highest score!</p>
-            </div>
-            
-            <div class="game-frame">
-                <iframe class="game-iframe" src="https://itch.io/embed/201291" frameborder="0"></iframe>
-            </div>
-            
-            <div class="controls">
-                <h3>Controls</h3>
-                <ul>
-                    <li><span class="key">←</span> <span class="key">→</span> Move left/right</li>
-                    <li><span class="key">↑</span> <span class="key">↓</span> Move up/down</li>
-                    <li><span class="key">Space</span> Special ability</li>
-                </ul>
+            <iframe 
+                class="game-frame" 
+                src="https://itch.io/embed/201291" 
+                allowfullscreen>
+            </iframe>
+
+            <div class="game-info">
+                <h1 class="game-title">Snake Force</h1>
+                <p class="game-description">
+                    An exciting arcade game where you control a snake through various challenges. 
+                    Collect power-ups and avoid obstacles in this thrilling adventure!
+                </p>
+                
+                <div class="controls">
+                    <h3>How to Play</h3>
+                    <ul>
+                        <li>Use arrow keys to control the snake's direction</li>
+                        <li>Collect power-ups to grow stronger</li>
+                        <li>Avoid obstacles and enemies</li>
+                        <li>Try to achieve the highest score possible</li>
+                    </ul>
+                </div>
+
+                <a href="../../index.html" class="back-button">Back to Home</a>
             </div>
         </div>
     </main>
