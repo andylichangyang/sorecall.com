@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>马里奥VS路易吉 - SoreCall</title>
+    <title>Mario VS Luigi - SoreCall</title>
     <link rel="stylesheet" href="../../css/style.css">
     <style>
         .game-container {
@@ -47,56 +47,62 @@
             justify-content: center;
             align-items: center;
             background: #231F20;
-            z-index: 10;
+            color: white;
         }
         
-        .loading-bar-container {
-            width: 60%;
-            height: 10px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 5px;
-            margin-top: 20px;
+        .loading-progress {
+            width: 80%;
+            max-width: 300px;
+            height: 20px;
+            background: #333;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
         }
         
         .loading-bar {
             width: 0%;
             height: 100%;
             background: #3498db;
-            border-radius: 5px;
-            transition: width 0.3s;
+            transition: width 0.3s ease;
         }
         
         .loading-text {
-            color: white;
-            font-size: 16px;
-            margin-top: 10px;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
         }
         
-        .loading-tips {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 14px;
-            margin-top: 30px;
-            max-width: 80%;
-            text-align: center;
-        }
-        
-        .play-button-container {
-            margin-top: 20px;
-        }
-        
-        .game-action-btn {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 0 10px;
-            background-color: #3498db;
-            color: white;
-            text-decoration: none;
+        .controls {
+            text-align: left;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: #f2f2f2;
             border-radius: 5px;
-            transition: background-color 0.3s;
         }
         
-        .game-action-btn:hover {
-            background-color: #2980b9;
+        .controls h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        
+        .controls ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .controls li {
+            margin: 10px 0;
+            padding: 5px 0;
+        }
+        
+        .key {
+            display: inline-block;
+            padding: 2px 8px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            margin: 0 2px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -105,43 +111,40 @@
         <nav>
             <div class="logo">SoreCall</div>
             <ul>
-                <li><a href="../../index.html">首页</a></li>
-                <li><a href="../../games.html">游戏列表</a></li>
-                <li><a href="../../about.html">关于我们</a></li>
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../../games.html">Games</a></li>
+                <li><a href="../../about.html">About</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
         <div class="game-container">
-            <h1>马里奥VS路易吉</h1>
+            <h1>Mario VS Luigi</h1>
+            
             <div class="game-instructions">
-                <h3>游戏说明：</h3>
-                <p>在这款精彩的超级马里奥同人游戏中，体验马里奥和路易吉的对决！使用键盘控制角色的移动和跳跃。</p>
-                <h3>操作说明：</h3>
-                <ul>
-                    <li>使用方向键控制角色移动</li>
-                    <li>空格键跳跃</li>
-                    <li>收集道具增强能力</li>
-                </ul>
+                <h2>Game Description</h2>
+                <p>Experience the ultimate showdown between Mario and Luigi! This exciting game pits the two brothers against each other in a series of challenging levels. Use your keyboard controls to move, jump, and defeat your opponent.</p>
             </div>
             
-            <div class="play-button-container">
-                <button id="start-game-btn" class="game-action-btn">加载游戏</button>
-                <a href="https://sorecall.com/games/mario/Build/MarioVsLuigi-WebGL.data.unityweb" download class="game-action-btn">下载游戏</a>
-            </div>
-            
-            <!-- 游戏区域 -->
-            <div class="game-frame" id="game-container" style="display: none;">
-                <div class="loading-container" id="loading-screen">
-                    <div class="loading-spinner"></div>
-                    <div class="loading-bar-container">
-                        <div class="loading-bar" id="loading-bar"></div>
+            <div class="game-frame">
+                <div id="unity-canvas"></div>
+                <div class="loading-container">
+                    <div class="loading-text">Loading game...</div>
+                    <div class="loading-progress">
+                        <div class="loading-bar"></div>
                     </div>
-                    <div class="loading-text" id="loading-text">准备加载游戏... (0%)</div>
-                    <div class="loading-tips">加载时间取决于您的网络速度，请耐心等待</div>
                 </div>
-                <canvas id="unity-canvas" width=960 height=540></canvas>
+            </div>
+            
+            <div class="controls">
+                <h3>Controls</h3>
+                <ul>
+                    <li><span class="key">←</span> <span class="key">→</span> Move left/right</li>
+                    <li><span class="key">Space</span> Jump</li>
+                    <li><span class="key">A</span> Attack</li>
+                    <li><span class="key">S</span> Special move</li>
+                </ul>
             </div>
         </div>
     </main>
@@ -150,57 +153,44 @@
         <p>&copy; 2024 SoreCall. All rights reserved.</p>
     </footer>
 
-    <!-- Unity WebGL 加载脚本 -->
     <script>
-        // 延迟加载游戏
-        document.getElementById('start-game-btn').addEventListener('click', function() {
-            this.disabled = true;
-            this.textContent = '游戏加载中...';
-            document.getElementById('game-container').style.display = 'block';
-            
-            // 加载游戏脚本
-            var script = document.createElement('script');
-            script.src = "Build/MarioVsLuigi-WebGL.loader.js";
-            script.onload = function() {
-                // 添加移动设备支持
-                var meta = document.createElement('meta');
-                meta.name = 'viewport';
-                meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
-                document.getElementsByTagName('head')[0].appendChild(meta);
+        var buildUrl = "Build";
+        var loaderUrl = buildUrl + "/WebGL.loader.js";
+        var config = {
+            dataUrl: buildUrl + "/WebGL.data",
+            frameworkUrl: buildUrl + "/WebGL.framework.js",
+            codeUrl: buildUrl + "/WebGL.wasm",
+            streamingAssetsUrl: "StreamingAssets",
+            companyName: "SoreCall",
+            productName: "Mario VS Luigi",
+            productVersion: "1.0",
+            showBanner: false
+        };
 
-                // 创建Unity实例
-                createUnityInstance(document.querySelector("#unity-canvas"), {
-                    dataUrl: "Build/MarioVsLuigi-WebGL.data.unityweb",
-                    frameworkUrl: "Build/MarioVsLuigi-WebGL.framework.js.unityweb",
-                    codeUrl: "Build/MarioVsLuigi-WebGL.wasm.unityweb",
-                    streamingAssetsUrl: "StreamingAssets",
-                    companyName: "ipodtouch0218",
-                    productName: "NSMB-MarioVsLuigi",
-                    productVersion: "1.7.1.0-beta",
-                }, function(progress) {
-                    // 更新加载进度
-                    var percent = Math.round(progress * 100);
-                    document.getElementById('loading-bar').style.width = percent + '%';
-                    document.getElementById('loading-text').textContent = '游戏加载中... (' + percent + '%)';
-                    
-                    if(percent >= 100) {
-                        setTimeout(function() {
-                            document.getElementById('loading-screen').style.display = 'none';
-                        }, 1000);
-                    }
-                });
-            };
-            document.body.appendChild(script);
-        });
-
-        // 预加载一些必要资源
-        window.addEventListener('load', function() {
-            var preloadLink = document.createElement('link');
-            preloadLink.rel = 'preload';
-            preloadLink.as = 'script';
-            preloadLink.href = "Build/MarioVsLuigi-WebGL.loader.js";
-            document.head.appendChild(preloadLink);
-        });
+        var container = document.querySelector("#unity-canvas");
+        var canvas = document.createElement("canvas");
+        var loadingBar = document.querySelector(".loading-bar");
+        var loadingText = document.querySelector(".loading-text");
+        var loadingContainer = document.querySelector(".loading-container");
+        
+        container.appendChild(canvas);
+        
+        var script = document.createElement("script");
+        script.src = loaderUrl;
+        script.onload = () => {
+            createUnityInstance(canvas, config, (progress) => {
+                loadingBar.style.width = 100 * progress + "%";
+                if (progress === 1) {
+                    loadingContainer.style.display = "none";
+                }
+            }).then((unityInstance) => {
+                // 游戏加载完成后的处理
+                console.log("Game loaded successfully!");
+            }).catch((message) => {
+                alert(message);
+            });
+        };
+        document.body.appendChild(script);
     </script>
 </body>
 </html>
