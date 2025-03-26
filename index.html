@@ -73,37 +73,153 @@
     
     .game-grid {
       margin-bottom: 4rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 2rem;
     }
     
     .game-card {
       transition: all 0.3s;
       border-radius: 10px;
       overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      background: white;
     }
     
     .game-card:hover {
       transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
     }
     
-    .game-card img {
-      height: 220px;
+    .game-thumbnail {
+      position: relative;
+      overflow: hidden;
+      height: 180px;
+      cursor: pointer;
+    }
+    
+    .game-thumbnail img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       transition: transform 0.5s;
     }
     
-    .game-card:hover img {
+    .game-card:hover .game-thumbnail img {
       transform: scale(1.05);
     }
     
-    .loading-animation {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 3px solid rgba(255,255,255,.3);
-      border-radius: 50%;
-      border-top-color: #fff;
-      animation: spin 1s ease-in-out infinite;
+    .game-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.3);
+      opacity: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.3s;
+    }
+    
+    .game-thumbnail:hover .game-overlay {
+      opacity: 1;
+    }
+    
+    .play-icon {
+      color: white;
+      font-size: 3rem;
+    }
+    
+    .game-info {
+      padding: 1.2rem;
+    }
+    
+    .game-info h3 {
+      margin: 0 0 0.8rem;
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    
+    .game-info h3:hover {
+      color: #3498db;
+    }
+    
+    .game-info p {
+      color: #666;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+    
+    .game-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #888;
+    }
+    
+    .game-category {
+      background: #f1f1f1;
+      padding: 0.3rem 0.6rem;
+      border-radius: 3px;
+    }
+    
+    .game-rating {
+      display: flex;
+      align-items: center;
+    }
+    
+    .star {
+      color: #f1c40f;
+      margin-right: 2px;
+    }
+    
+    .newsletter {
+      background: #f8f9fa;
+      padding: 3rem;
+      text-align: center;
+      border-radius: 10px;
+      margin: 0 2rem 3rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    .newsletter h3 {
+      margin-bottom: 1rem;
+    }
+    
+    .newsletter form {
+      display: flex;
+      max-width: 500px;
+      margin: 1.5rem auto 0;
+    }
+    
+    .newsletter input {
+      flex: 1;
+      padding: 0.8rem 1.2rem;
+      border: 1px solid #ddd;
+      border-radius: 5px 0 0 5px;
+      outline: none;
+      font-size: 1rem;
+    }
+    
+    .newsletter button {
+      padding: 0.8rem 1.5rem;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    
+    .newsletter button:hover {
+      background: #2980b9;
     }
     
     @keyframes fadeInUp {
@@ -115,51 +231,6 @@
         opacity: 1;
         transform: translateY(0);
       }
-    }
-    
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    
-    .newsletter {
-      background: #f8f9fa;
-      padding: 3rem 0;
-      text-align: center;
-      border-radius: 10px;
-      margin: 0 2rem 3rem;
-    }
-    
-    .newsletter h3 {
-      margin-bottom: 1rem;
-    }
-    
-    .newsletter form {
-      display: flex;
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 0 1rem;
-    }
-    
-    .newsletter input {
-      flex: 1;
-      padding: 0.8rem;
-      border: 1px solid #ddd;
-      border-radius: 5px 0 0 5px;
-      outline: none;
-    }
-    
-    .newsletter button {
-      padding: 0.8rem 1.5rem;
-      background: #3498db;
-      color: white;
-      border: none;
-      border-radius: 0 5px 5px 0;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    
-    .newsletter button:hover {
-      background: #2980b9;
     }
   </style>
 </head>
@@ -178,27 +249,89 @@
   <main>
     <section class="hero">
       <h1>欢迎来到 SoreCall</h1>
-      <p>发现精彩游戏，开启娱乐之旅。我们提供精选游戏，让您随时随地享受游戏乐趣。</p>
+      <p>发现精彩游戏，开启娱乐之旅。我们精心挑选各类优质游戏，让您随时随地享受游戏乐趣。</p>
     </section>
     
     <div class="category-nav">
-      <button class="category-btn active">所有游戏</button>
-      <button class="category-btn">动作冒险</button>
-      <button class="category-btn">角色扮演</button>
-      <button class="category-btn">休闲游戏</button>
-      <button class="category-btn">策略游戏</button>
+      <button class="category-btn active">全部游戏</button>
+      <button class="category-btn">动作</button>
+      <button class="category-btn">冒险</button>
+      <button class="category-btn">休闲</button>
+      <button class="category-btn">策略</button>
     </div>
 
     <h2 class="section-title">热门游戏</h2>
     <section class="featured-games">
       <div class="game-grid">
         <div class="game-card">
-          <img src="https://storage.googleapis.com/pai-images/fe7b2e83e1a047038a6a1c5e3bf75183.jpeg" alt="马里奥VS路易吉">
-          <h3>马里奥VS路易吉</h3>
-          <p>体验马里奥和路易吉的对决！使用键盘控制角色的移动和跳跃。</p>
-          <a href="games/mario/index.html" class="play-button">开始游戏</a>
+          <a href="games/mario/index.html" class="game-thumbnail">
+            <img src="https://storage.googleapis.com/pai-images/fe7b2e83e1a047038a6a1c5e3bf75183.jpeg" alt="马里奥VS路易吉">
+            <div class="game-overlay">
+              <div class="play-icon">▶</div>
+            </div>
+          </a>
+          <div class="game-info">
+            <a href="games/mario/index.html"><h3>马里奥VS路易吉</h3></a>
+            <p>体验马里奥和路易吉的对决！使用键盘控制角色的移动和跳跃。</p>
+            <div class="game-meta">
+              <span class="game-category">动作</span>
+              <div class="game-rating">
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <!-- 预留游戏卡片位置 -->
+        
+        <!-- 更多游戏卡片示例 -->
+        <div class="game-card">
+          <a href="#" class="game-thumbnail">
+            <img src="https://storage.googleapis.com/pai-images/cd4ee3d5bbe0455ca78e878a4f8df7ce.jpeg" alt="太空探索者">
+            <div class="game-overlay">
+              <div class="play-icon">▶</div>
+            </div>
+          </a>
+          <div class="game-info">
+            <a href="#"><h3>太空探索者</h3></a>
+            <p>探索浩瀚宇宙，发现新的星球和奇妙生物，开启星际冒险之旅。</p>
+            <div class="game-meta">
+              <span class="game-category">冒险</span>
+              <div class="game-rating">
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span>☆</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="game-card">
+          <a href="#" class="game-thumbnail">
+            <img src="https://storage.googleapis.com/pai-images/675b5df0fe9348f9ab85e825fa7c6415.jpeg" alt="解谜大师">
+            <div class="game-overlay">
+              <div class="play-icon">▶</div>
+            </div>
+          </a>
+          <div class="game-info">
+            <a href="#"><h3>解谜大师</h3></a>
+            <p>挑战你的大脑，解开数百个独特谜题，提升逻辑思维能力。</p>
+            <div class="game-meta">
+              <span class="game-category">休闲</span>
+              <div class="game-rating">
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
     
@@ -206,10 +339,22 @@
     <section class="coming-soon">
       <div class="game-grid">
         <div class="game-card">
-          <img src="https://storage.googleapis.com/pai-images/3ea7e04f24d649d59f51bd41e260d105.jpeg" alt="敬请期待">
-          <h3>敬请期待</h3>
-          <p>更多精彩游戏即将上线，请持续关注我们的更新！</p>
-          <a href="#" class="play-button" style="background-color: #ccc; cursor: not-allowed;">即将上线</a>
+          <div class="game-thumbnail">
+            <img src="https://storage.googleapis.com/pai-images/3ea7e04f24d649d59f51bd41e260d105.jpeg" alt="即将上线">
+            <div class="game-overlay">
+              <div class="play-icon" style="font-size: 1.5rem;">即将上线</div>
+            </div>
+          </div>
+          <div class="game-info">
+            <h3>战略指挥官</h3>
+            <p>在这款史诗级策略游戏中领导你的军队走向胜利。建立基地，训练部队，征服敌人。</p>
+            <div class="game-meta">
+              <span class="game-category">策略</span>
+              <div class="game-rating">
+                <span>即将上线</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -218,14 +363,14 @@
       <h3>订阅我们的新游戏通知</h3>
       <p>第一时间获取最新游戏和优惠信息</p>
       <form>
-        <input type="email" placeholder="输入您的邮箱">
+        <input type="email" placeholder="输入您的邮箱地址">
         <button type="submit">订阅</button>
       </form>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2024 SoreCall. All rights reserved.</p>
+    <p>&copy; 2024 SoreCall. 保留所有权利。</p>
   </footer>
 
   <script>
