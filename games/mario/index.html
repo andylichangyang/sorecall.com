@@ -153,13 +153,14 @@
         <p>&copy; 2024 SoreCall. All rights reserved.</p>
     </footer>
 
+    // ... existing code ...
     <script>
         var buildUrl = "Build";
-        var loaderUrl = buildUrl + "/WebGL.loader.js";
+        var loaderUrl = buildUrl + "/MarioVsLuigi-WebGL.loader.js";
         var config = {
-            dataUrl: buildUrl + "/WebGL.data",
-            frameworkUrl: buildUrl + "/WebGL.framework.js",
-            codeUrl: buildUrl + "/WebGL.wasm",
+            dataUrl: buildUrl + "/MarioVsLuigi-WebGL.data.unityweb",
+            frameworkUrl: buildUrl + "/MarioVsLuigi-WebGL.framework.js.unityweb",
+            codeUrl: buildUrl + "/MarioVsLuigi-WebGL.wasm.unityweb",
             streamingAssetsUrl: "StreamingAssets",
             companyName: "SoreCall",
             productName: "Mario VS Luigi",
@@ -188,9 +189,12 @@
                 console.log("Game loaded successfully!");
             }).catch((message) => {
                 alert(message);
+                console.error("Game loading error:", message);
             });
         };
         document.body.appendChild(script);
+    </script>
+// ... existing code ...
     </script>
 </body>
 </html>
