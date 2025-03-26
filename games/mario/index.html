@@ -1,47 +1,106 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>马里奥VS路易吉 - SoreCall</title>
+    <link rel="stylesheet" href="../../css/style.css">
     <style>
-      body {
-        margin: 0;
-        padding: 0;
-        background: #231F20;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-      }
-      #unity-canvas {
-        width: 100%;
-        height: 100vh;
-        max-width: 960px;
-        max-height: 540px;
-      }
+        .game-container {
+            max-width: 1000px;
+            margin: 100px auto 60px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .game-instructions {
+            text-align: left;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+        }
+        
+        .game-frame {
+            width: 100%;
+            max-width: 960px;
+            height: 540px;
+            margin: 20px auto;
+            background: #231F20;
+        }
+        
+        #unity-canvas {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 18px;
+        }
     </style>
-  </head>
-  <body>
-    <canvas id="unity-canvas" width=960 height=540></canvas>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">SoreCall</div>
+            <ul>
+                <li><a href="../../index.html">首页</a></li>
+                <li><a href="../../games.html">游戏列表</a></li>
+                <li><a href="../../about.html">关于我们</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="game-container">
+            <h1>马里奥VS路易吉</h1>
+            <div class="game-instructions">
+                <h3>游戏说明：</h3>
+                <p>在这款精彩的超级马里奥同人游戏中，体验马里奥和路易吉的对决！使用键盘控制角色的移动和跳跃。</p>
+                <h3>操作说明：</h3>
+                <ul>
+                    <li>使用方向键控制角色移动</li>
+                    <li>空格键跳跃</li>
+                    <li>收集道具增强能力</li>
+                </ul>
+            </div>
+            
+            <!-- 游戏区域 -->
+            <div class="game-frame">
+                <canvas id="unity-canvas" width=960 height=540></canvas>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 SoreCall. All rights reserved.</p>
+    </footer>
+
+    <!-- Unity WebGL 加载脚本 -->
     <script src="Build/MarioVsLuigi-WebGL.loader.js"></script>
     <script>
-      // 添加移动设备支持
-      var meta = document.createElement('meta');
-      meta.name = 'viewport';
-      meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
-      document.getElementsByTagName('head')[0].appendChild(meta);
+        // 添加移动设备支持
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
 
-      // 创建Unity实例
-      createUnityInstance(document.querySelector("#unity-canvas"), {
-        dataUrl: "Build/MarioVsLuigi-WebGL.data.unityweb",
-        frameworkUrl: "Build/MarioVsLuigi-WebGL.framework.js.unityweb",
-        codeUrl: "Build/MarioVsLuigi-WebGL.wasm.unityweb",
-        streamingAssetsUrl: "StreamingAssets",
-        companyName: "ipodtouch0218",
-        productName: "NSMB-MarioVsLuigi",
-        productVersion: "1.7.1.0-beta",
-      });
+        // 创建Unity实例
+        createUnityInstance(document.querySelector("#unity-canvas"), {
+            dataUrl: "Build/MarioVsLuigi-WebGL.data.unityweb",
+            frameworkUrl: "Build/MarioVsLuigi-WebGL.framework.js.unityweb",
+            codeUrl: "Build/MarioVsLuigi-WebGL.wasm.unityweb",
+            streamingAssetsUrl: "StreamingAssets",
+            companyName: "ipodtouch0218",
+            productName: "NSMB-MarioVsLuigi",
+            productVersion: "1.7.1.0-beta",
+        });
     </script>
-  </body>
+</body>
 </html>
