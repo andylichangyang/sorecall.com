@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>游戏列表 - SoreCall</title>
+    <title>Games - SoreCall</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
         .games-section {
@@ -204,32 +204,32 @@
         <nav>
             <div class="logo">SoreCall</div>
             <ul>
-                <li><a href="index.html">首页</a></li>
-                <li><a href="games.html">游戏列表</a></li>
-                <li><a href="about.html">关于我们</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="about.html">About</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
         <section class="games-section">
-            <h1>所有游戏</h1>
+            <h1>All Games</h1>
             
             <div class="games-filter">
                 <div class="filter-category">
-                    <button class="active">全部</button>
-                    <button>动作</button>
-                    <button>冒险</button>
-                    <button>休闲</button>
-                    <button>策略</button>
+                    <button class="active">All</button>
+                    <button>Action</button>
+                    <button>Adventure</button>
+                    <button>Casual</button>
+                    <button>Strategy</button>
                 </div>
                 
                 <div class="sort-dropdown">
                     <select>
-                        <option>最新发布</option>
-                        <option>最早发布</option>
-                        <option>最受欢迎</option>
-                        <option>评分最高</option>
+                        <option>Newest First</option>
+                        <option>Oldest First</option>
+                        <option>Most Popular</option>
+                        <option>Top Rated</option>
                     </select>
                 </div>
             </div>
@@ -237,16 +237,16 @@
             <div class="game-grid">
                 <div class="game-card">
                     <a href="games/mario/index.html" class="game-thumbnail">
-                        <img src="https://storage.googleapis.com/pai-images/fe7b2e83e1a047038a6a1c5e3bf75183.jpeg" alt="马里奥VS路易吉">
+                        <img src="https://storage.googleapis.com/pai-images/fe7b2e83e1a047038a6a1c5e3bf75183.jpeg" alt="Mario VS Luigi">
                         <div class="game-overlay">
                             <div class="play-icon">▶</div>
                         </div>
                     </a>
                     <div class="game-info">
-                        <a href="games/mario/index.html"><h3>马里奥VS路易吉</h3></a>
-                        <p>体验马里奥和路易吉的对决！使用键盘控制角色的移动和跳跃。</p>
+                        <a href="games/mario/index.html"><h3>Mario VS Luigi</h3></a>
+                        <p>Experience the ultimate showdown between Mario and Luigi! Use keyboard controls to move and jump.</p>
                         <div class="game-meta">
-                            <span class="game-category">动作</span>
+                            <span class="game-category">Action</span>
                             <div class="game-rating">
                                 <span class="star">★</span>
                                 <span class="star">★</span>
@@ -258,19 +258,19 @@
                     </div>
                 </div>
                 
-                <!-- 更多游戏卡片示例 -->
+                <!-- Additional game cards -->
                 <div class="game-card">
                     <a href="#" class="game-thumbnail">
-                        <img src="https://storage.googleapis.com/pai-images/cd4ee3d5bbe0455ca78e878a4f8df7ce.jpeg" alt="太空探索者">
+                        <img src="https://storage.googleapis.com/pai-images/cd4ee3d5bbe0455ca78e878a4f8df7ce.jpeg" alt="Space Explorer">
                         <div class="game-overlay">
                             <div class="play-icon">▶</div>
                         </div>
                     </a>
                     <div class="game-info">
-                        <a href="#"><h3>太空探索者</h3></a>
-                        <p>探索浩瀚宇宙，发现新的星球和奇妙生物，开启星际冒险之旅。</p>
+                        <a href="#"><h3>Space Explorer</h3></a>
+                        <p>Explore the vastness of space, discover new planets and incredible creatures in this interstellar adventure.</p>
                         <div class="game-meta">
-                            <span class="game-category">冒险</span>
+                            <span class="game-category">Adventure</span>
                             <div class="game-rating">
                                 <span class="star">★</span>
                                 <span class="star">★</span>
@@ -284,16 +284,16 @@
                 
                 <div class="game-card">
                     <a href="#" class="game-thumbnail">
-                        <img src="https://storage.googleapis.com/pai-images/675b5df0fe9348f9ab85e825fa7c6415.jpeg" alt="解谜大师">
+                        <img src="https://storage.googleapis.com/pai-images/675b5df0fe9348f9ab85e825fa7c6415.jpeg" alt="Puzzle Master">
                         <div class="game-overlay">
                             <div class="play-icon">▶</div>
                         </div>
                     </a>
                     <div class="game-info">
-                        <a href="#"><h3>解谜大师</h3></a>
-                        <p>挑战你的大脑，解开数百个独特谜题，提升逻辑思维能力。</p>
+                        <a href="#"><h3>Puzzle Master</h3></a>
+                        <p>Challenge your brain with hundreds of unique puzzles and improve your logical thinking skills.</p>
                         <div class="game-meta">
-                            <span class="game-category">休闲</span>
+                            <span class="game-category">Casual</span>
                             <div class="game-rating">
                                 <span class="star">★</span>
                                 <span class="star">★</span>
@@ -317,28 +317,28 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 SoreCall. 保留所有权利。</p>
+        <p>&copy; 2024 SoreCall. All rights reserved.</p>
     </footer>
 
     <script>
-        // 简单的类别筛选效果
+        // Simple category filtering effect
         const filterBtns = document.querySelectorAll('.filter-category button');
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                // 这里可以添加真正的筛选功能
+                // Add actual filtering functionality here
             });
         });
         
-        // 简单的分页效果
+        // Simple pagination effect
         const paginationBtns = document.querySelectorAll('.pagination button');
         paginationBtns.forEach(btn => {
             if (btn.textContent !== '<' && btn.textContent !== '>') {
                 btn.addEventListener('click', () => {
                     paginationBtns.forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
-                    // 这里可以添加真正的分页功能
+                    // Add actual pagination functionality here
                 });
             }
         });
