@@ -172,23 +172,32 @@
         var loadingText = document.querySelector(".loading-text");
         var loadingContainer = document.querySelector(".loading-container");
         
-        var script = document.createElement("script");
-        script.src = loaderUrl;
-        script.onload = () => {
-            createUnityInstance(canvas, config, (progress) => {
-                loadingBar.style.width = 100 * progress + "%";
-                if (progress === 1) {
-                    loadingContainer.style.display = "none";
-                }
-            }).then((unityInstance) => {
-                // Game loaded successfully
-                console.log("Game loaded successfully!");
-            }).catch((message) => {
-                alert(message);
-                console.error("Game loading error:", message);
-            });
-        };
-        document.body.appendChild(script);
+        // 确保 canvas 元素存在
+        if (!canvas) {
+            console.error("Canvas element not found!");
+        } else {
+            // 设置 canvas 的样式
+            canvas.style.width = "100%";
+            canvas.style.height = "100%";
+            
+            var script = document.createElement("script");
+            script.src = loaderUrl;
+            script.onload = () => {
+                createUnityInstance(canvas, config, (progress) => {
+                    loadingBar.style.width = 100 * progress + "%";
+                    if (progress === 1) {
+                        loadingContainer.style.display = "none";
+                    }
+                }).then((unityInstance) => {
+                    // Game loaded successfully
+                    console.log("Game loaded successfully!");
+                }).catch((message) => {
+                    alert(message);
+                    console.error("Game loading error:", message);
+                });
+            };
+            document.body.appendChild(script);
+        }
     </script>
 </body>
 </html>
