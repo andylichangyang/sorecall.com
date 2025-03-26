@@ -5,6 +5,163 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SoreCall - 游戏门户</title>
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* 增强主页样式 */
+    .hero {
+      background: linear-gradient(135deg, #3498db, #8e44ad);
+      padding: 6rem 2rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      border-radius: 0 0 20px 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 1s ease;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+      animation: fadeInUp 1.3s ease;
+    }
+    
+    .category-nav {
+      display: flex;
+      justify-content: center;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+    
+    .category-btn {
+      padding: 0.8rem 1.5rem;
+      margin: 0.5rem;
+      background: #f8f9fa;
+      border: none;
+      border-radius: 50px;
+      color: #333;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .category-btn:hover, .category-btn.active {
+      background: #3498db;
+      color: white;
+      transform: translateY(-2px);
+    }
+    
+    .section-title {
+      text-align: center;
+      margin: 3rem 0 2rem;
+      position: relative;
+      font-size: 2rem;
+    }
+    
+    .section-title:after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: #3498db;
+      margin: 10px auto;
+    }
+    
+    .game-grid {
+      margin-bottom: 4rem;
+    }
+    
+    .game-card {
+      transition: all 0.3s;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .game-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+    
+    .game-card img {
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+    
+    .game-card:hover img {
+      transform: scale(1.05);
+    }
+    
+    .loading-animation {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .newsletter {
+      background: #f8f9fa;
+      padding: 3rem 0;
+      text-align: center;
+      border-radius: 10px;
+      margin: 0 2rem 3rem;
+    }
+    
+    .newsletter h3 {
+      margin-bottom: 1rem;
+    }
+    
+    .newsletter form {
+      display: flex;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    
+    .newsletter input {
+      flex: 1;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 5px 0 0 5px;
+      outline: none;
+    }
+    
+    .newsletter button {
+      padding: 0.8rem 1.5rem;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    .newsletter button:hover {
+      background: #2980b9;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -21,11 +178,19 @@
   <main>
     <section class="hero">
       <h1>欢迎来到 SoreCall</h1>
-      <p>发现精彩游戏，开启娱乐之旅</p>
+      <p>发现精彩游戏，开启娱乐之旅。我们提供精选游戏，让您随时随地享受游戏乐趣。</p>
     </section>
+    
+    <div class="category-nav">
+      <button class="category-btn active">所有游戏</button>
+      <button class="category-btn">动作冒险</button>
+      <button class="category-btn">角色扮演</button>
+      <button class="category-btn">休闲游戏</button>
+      <button class="category-btn">策略游戏</button>
+    </div>
 
+    <h2 class="section-title">热门游戏</h2>
     <section class="featured-games">
-      <h2>热门游戏</h2>
       <div class="game-grid">
         <div class="game-card">
           <img src="https://storage.googleapis.com/pai-images/fe7b2e83e1a047038a6a1c5e3bf75183.jpeg" alt="马里奥VS路易吉">
@@ -33,12 +198,46 @@
           <p>体验马里奥和路易吉的对决！使用键盘控制角色的移动和跳跃。</p>
           <a href="games/mario/index.html" class="play-button">开始游戏</a>
         </div>
+        <!-- 预留游戏卡片位置 -->
       </div>
+    </section>
+    
+    <h2 class="section-title">即将上线</h2>
+    <section class="coming-soon">
+      <div class="game-grid">
+        <div class="game-card">
+          <img src="https://storage.googleapis.com/pai-images/3ea7e04f24d649d59f51bd41e260d105.jpeg" alt="敬请期待">
+          <h3>敬请期待</h3>
+          <p>更多精彩游戏即将上线，请持续关注我们的更新！</p>
+          <a href="#" class="play-button" style="background-color: #ccc; cursor: not-allowed;">即将上线</a>
+        </div>
+      </div>
+    </section>
+    
+    <section class="newsletter">
+      <h3>订阅我们的新游戏通知</h3>
+      <p>第一时间获取最新游戏和优惠信息</p>
+      <form>
+        <input type="email" placeholder="输入您的邮箱">
+        <button type="submit">订阅</button>
+      </form>
     </section>
   </main>
 
   <footer>
     <p>&copy; 2024 SoreCall. All rights reserved.</p>
   </footer>
+
+  <script>
+    // 简单的类别筛选效果
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    categoryBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        categoryBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        // 这里可以添加真正的筛选功能
+      });
+    });
+  </script>
 </body>
 </html>
