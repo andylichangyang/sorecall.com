@@ -28,6 +28,7 @@
             height: 540px;
             margin: 20px auto;
             background: #231F20;
+            position: relative;
         }
         
         #unity-canvas {
@@ -35,13 +36,67 @@
             height: 100%;
         }
         
-        .loading {
+        .loading-container {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #231F20;
+            z-index: 10;
+        }
+        
+        .loading-bar-container {
+            width: 60%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        
+        .loading-bar {
+            width: 0%;
+            height: 100%;
+            background: #3498db;
+            border-radius: 5px;
+            transition: width 0.3s;
+        }
+        
+        .loading-text {
             color: white;
-            font-size: 18px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        
+        .loading-tips {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            margin-top: 30px;
+            max-width: 80%;
+            text-align: center;
+        }
+        
+        .play-button-container {
+            margin-top: 20px;
+        }
+        
+        .game-action-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 0 10px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .game-action-btn:hover {
+            background-color: #2980b9;
         }
     </style>
 </head>
@@ -71,8 +126,21 @@
                 </ul>
             </div>
             
+            <div class="play-button-container">
+                <button id="start-game-btn" class="game-action-btn">加载游戏</button>
+                <a href="https://sorecall.com/games/mario/Build/MarioVsLuigi-WebGL.data.unityweb" download class="game-action-btn">下载游戏</a>
+            </div>
+            
             <!-- 游戏区域 -->
-            <div class="game-frame">
+            <div class="game-frame" id="game-container" style="display: none;">
+                <div class="loading-container" id="loading-screen">
+                    <div class="loading-spinner"></div>
+                    <div class="loading-bar-container">
+                        <div class="loading-bar" id="loading-bar"></div>
+                    </div>
+                    <div class="loading-text" id="loading-text">准备加载游戏... (0%)</div>
+                    <div class="loading-tips">加载时间取决于您的网络速度，请耐心等待</div>
+                </div>
                 <canvas id="unity-canvas" width=960 height=540></canvas>
             </div>
         </div>
@@ -83,23 +151,55 @@
     </footer>
 
     <!-- Unity WebGL 加载脚本 -->
-    <script src="Build/MarioVsLuigi-WebGL.loader.js"></script>
     <script>
-        // 添加移动设备支持
-        var meta = document.createElement('meta');
-        meta.name = 'viewport';
-        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
-        document.getElementsByTagName('head')[0].appendChild(meta);
+        // 延迟加载游戏
+        document.getElementById('start-game-btn').addEventListener('click', function() {
+            this.disabled = true;
+            this.textContent = '游戏加载中...';
+            document.getElementById('game-container').style.display = 'block';
+            
+            // 加载游戏脚本
+            var script = document.createElement('script');
+            script.src = "Build/MarioVsLuigi-WebGL.loader.js";
+            script.onload = function() {
+                // 添加移动设备支持
+                var meta = document.createElement('meta');
+                meta.name = 'viewport';
+                meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+                document.getElementsByTagName('head')[0].appendChild(meta);
 
-        // 创建Unity实例
-        createUnityInstance(document.querySelector("#unity-canvas"), {
-            dataUrl: "Build/MarioVsLuigi-WebGL.data.unityweb",
-            frameworkUrl: "Build/MarioVsLuigi-WebGL.framework.js.unityweb",
-            codeUrl: "Build/MarioVsLuigi-WebGL.wasm.unityweb",
-            streamingAssetsUrl: "StreamingAssets",
-            companyName: "ipodtouch0218",
-            productName: "NSMB-MarioVsLuigi",
-            productVersion: "1.7.1.0-beta",
+                // 创建Unity实例
+                createUnityInstance(document.querySelector("#unity-canvas"), {
+                    dataUrl: "Build/MarioVsLuigi-WebGL.data.unityweb",
+                    frameworkUrl: "Build/MarioVsLuigi-WebGL.framework.js.unityweb",
+                    codeUrl: "Build/MarioVsLuigi-WebGL.wasm.unityweb",
+                    streamingAssetsUrl: "StreamingAssets",
+                    companyName: "ipodtouch0218",
+                    productName: "NSMB-MarioVsLuigi",
+                    productVersion: "1.7.1.0-beta",
+                }, function(progress) {
+                    // 更新加载进度
+                    var percent = Math.round(progress * 100);
+                    document.getElementById('loading-bar').style.width = percent + '%';
+                    document.getElementById('loading-text').textContent = '游戏加载中... (' + percent + '%)';
+                    
+                    if(percent >= 100) {
+                        setTimeout(function() {
+                            document.getElementById('loading-screen').style.display = 'none';
+                        }, 1000);
+                    }
+                });
+            };
+            document.body.appendChild(script);
+        });
+
+        // 预加载一些必要资源
+        window.addEventListener('load', function() {
+            var preloadLink = document.createElement('link');
+            preloadLink.rel = 'preload';
+            preloadLink.as = 'script';
+            preloadLink.href = "Build/MarioVsLuigi-WebGL.loader.js";
+            document.head.appendChild(preloadLink);
         });
     </script>
 </body>
